@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+        .highlight{
+            background-color: yellow;
+            color: red;
+            font-weight: bold;
+        }
+        #mouseover{
+            border: 5px solid green;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header-1" id="header1">Hello World!</h1>
+    <ul id="ul1">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <button onclick="removeLi()">Remove list</button>
+    <button onclick="removeLast()">Remove last li</button>
+    <img src="https://images.pexels.com/photos/26775381/pexels-photo-26775381/free-photo-of-black-and-white-photograph-of-sand-dunes-in-the-desert.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" id="img-src">
+    <p id="para">This a paragraph!</p>
+    <button onclick="addClass()">Add</button>
+    <button onclick="removeClass()">Remove</button>
+    <button onclick="changeText()" id="mouseover">Change Text</button>
+    <script>
+        // Activity 1:
+        // Select an HTML tag by its ID and changes its text content
+        document.getElementById("header1").textContent = "Changed!"
+        
+        // Select an element by its class and change its background color
+        document.querySelector(".header-1").style.backgroundColor = "lightblue" 
+
+        // Activity 2: Creating and Appending elements
+        //  Create a new div element with some text content and append it to the body
+        const div = document.createElement("div")
+        div.textContent = "Appending div in body which is created through js!"
+        // document.body.appendChild(div) This will move the div at the end whenever a new tag is added
+        document.body.insertBefore(div, document.getElementById("ul1")) //This will add it to specific location
+
+        // Create a new li element and add it to the existing ul list
+        const li = document.createElement("li")
+        li.textContent = 4;
+        document.getElementById("ul1").appendChild(li)
+
+        // Activity 3: Removing Elements
+        // Select an html element and remove it from the DOM
+        function removeLi(){document.getElementById("ul1").remove()}
+
+        // Remove the last child of a specific html elemet
+        function removeLast(){document.getElementById("ul1").removeChild(ul1.lastElementChild)}
+
+        // Activity 4: Modifying Attributes and Classes
+        // Select an html element and change one of its attributes (e.g, src of an img tag)
+        document.getElementById("img-src").src = ("https://images.pexels.com/photos/10147934/pexels-photo-10147934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+
+        // Add and remove a css class to/from an html element
+        function addClass(){
+            document.getElementById("para").classList.add("highlight")
+        }
+        function removeClass(){
+            document.getElementById("para").classList.remove("highlight")
+        }
+
+        // Activity 5: Event Handling
+        // Add a click event listener to a button that changes the text content of a paragraph
+        function changeText(){
+            document.getElementById("para").textContent = "Text is changed!"
+        }
+
+        // Add a mouseover event listener to an element that changes its border color
+        document.getElementById("mouseover").addEventListener("mouseover", () => document.getElementById("mouseover").style.border = "5px solid red")
+
+    </script>
+</body>
+</html>
