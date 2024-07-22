@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+</head>
+<body>
+    <!-- Basic Event Handling -->
+     <p id="para">Content before any change!</p>
+     <button id="change">Change Paragraph</button>
+     <br>
+     <img src="https://images.pexels.com/photos/10148059/pexels-photo-10148059.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" id="img-toggle" style="display: block;">
+     <br>
+     <input type="text" id="inputId">
+     <p id="text"></p>
+
+     <form id="myForm">
+        <p>Name</p>
+        <input type="text" name="name" id="name">
+        <p>Email</p>
+        <input type="email" name="email" id="email">
+        <button type="submit">Submit</button>
+     </form>
+
+     <form id="myForm1">
+        <label for="dropdown">Select an option:</label>
+        <select id="dropdown">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </form>
+
+    <p id="selectedValue">Selected value will appear here.</p>
+    <br>
+    <ul id="list">
+        <li>List One</li>
+        <li>List Two</li>
+        <li>List Three</li>
+        <li>List Four</li>
+    </ul>
+    <br>
+    <div id="parent">
+        <div class="child">Child 1</div>
+        <div class="child">Child 2</div>
+    </div>
+    <button id="addChild">Add Child</button>
+     <script>
+        // Activity 1: Basic Event Handling
+        // Add a click event listener to a button that changes the text content of a paragraph
+           document.getElementById("change").addEventListener("click", () => {document.getElementById("para").textContent = "Content has been changed!"})
+
+        // Add a double-click event listener to an image that toggles its visibility
+            document.getElementById("img-toggle").addEventListener("dblclick", function(){
+                let img = document.getElementById("img-toggle")
+                if(img.style.display === "none"){
+                    img.style.display = "block"
+                }else{
+                    img.style.display = "none"
+                }
+            })
+
+        // Activity 2: Mouse Events
+        // Add a mouseover event listener to an element that changes its background color
+            document.getElementById("change").addEventListener("mouseover", () => {document.getElementById("change").style.backgroundColor = "pink"})
+
+        // Add a mouseout event listener to an element that resets its background color
+            document.getElementById("change").addEventListener("mouseout", () => {document.getElementById("change").style.backgroundColor = ""})
+
+        // Activity 3: Keyboard Events
+        // Add a keydown event listener to an input field that logs the key pressed to the console
+            document.getElementById("inputId").addEventListener("keydown", (e) =>{console.log(e.target.value)})
+            
+        // Add a keyup event listener to an input field that displays the current value in a paragraph
+            document.getElementById("inputId").addEventListener("keyup", (e) => {
+                document.getElementById("text").textContent = e.target.value
+            })
+
+        // Activity 4: Form events
+        // Add a submit event listener to a form that prevents default submission and logs form data to console
+            const form = document.getElementById("myForm")
+            form.addEventListener("submit", (e) => 
+            {e.preventDefault()
+            const formData = new FormData(form)
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value
+            })
+            console.log(data)
+        })
+
+        // Add a change event listener to a select dropdown that displays the selected value in a paragraph
+            const dropDown = document.getElementById("dropdown")
+            const selectedValue = document.getElementById("selectedValue")
+            dropDown.addEventListener('change', () => {
+                const selected = dropDown.value
+                selectedValue.textContent = selected
+            })
+
+        // Activity 5: Event Delegation
+        // Add a click event listener to a list that logs the text content of the clicked list item using event delegation
+            document.getElementById("list").addEventListener('click', (event) => {
+                if(event.target && event.target.nodeName === 'LI'){
+                    console.log(event.target.textContent)
+                }
+            })
+        
+        // Add an event listener to a parent element that listens for events from dynamically added child elements
+            document.getElementById("parent").addEventListener('click', (e) => {
+                if(e.target && e.target.classList.contains('child')){
+                    console.log('Clicked: ', event.target.textContent)
+                }
+            })
+
+            document.getElementById('addChild').addEventListener('click', () => {
+                let newChild = document.createElement('div')
+                newChild.className = 'child'
+                newChild.textContent = 'Child ' + (document.querySelectorAll('.child').length + 1)
+                document.getElementById('parent').appendChild(newChild)
+            })
+
+     </script>
+</body>
+</html>
